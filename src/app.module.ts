@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 
 import { JoiValidationSchema } from './config';
+import { UrlModule } from './url/url.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { JoiValidationSchema } from './config';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-    })
+    }),
+    UrlModule
   ],
 })
 export class AppModule {}
