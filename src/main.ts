@@ -18,8 +18,8 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('Share Image')
-    .setDescription('Documentacion detallada de cada endpoint de la API de Share Image.')
+    .setTitle('My Unsplash')
+    .setDescription('Documentacion detallada de cada endpoint de la API de My Unsplash.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument( app, config );

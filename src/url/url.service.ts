@@ -15,6 +15,11 @@ export class UrlService {
     private readonly dataSource: DataSource,
   ) {}
 
+  /**
+   * Crear una nueva Url
+   * @param newUrl Url a crear
+   * @returns Url creada
+   */
   async create( newUrl: CreateUrlDto ): Promise<Url> {
     try {
       const urlCreated = this.urlRepository.create( newUrl );
@@ -27,6 +32,10 @@ export class UrlService {
     }
   }
 
+  /**
+   * Encontrar todas las Url
+   * @returns Arreglo de Url
+   */
   async findAll(): Promise<Url[]> {
     try {
       const res = await this.urlRepository.find();
@@ -37,6 +46,11 @@ export class UrlService {
     }
   }
 
+  /**
+   * Encontrar una Url por id
+   * @param id id de la Url a encontrar
+   * @returns Url encontrada
+   */
   async findOne( id: string ): Promise<Url> {
     try {
       const urlFound = await this.urlRepository.findOneBy({ id });
@@ -50,6 +64,10 @@ export class UrlService {
     }
   }
 
+  /**
+   * Eliminar una Url de la base de datos desde su id
+   * @param id id de la Url a eliminar
+   */
   async remove( id: string ): Promise<void> {
     try {
       await this.findOne( id );
@@ -60,6 +78,10 @@ export class UrlService {
     }
   }
 
+  /**
+   * Catchear posibles errores y controlarlos
+   * @param error any
+   */
   private catchErrors( error: any ): void {
     if ( error.code === '23505' )
       throw new BadRequestException('The Url already exist')
