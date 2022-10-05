@@ -1,8 +1,9 @@
 import { Injectable, BadRequestException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, Like, Repository } from 'typeorm';
+import { validate as isUUID } from 'uuid';
 
-import { CreateUrlDto } from './dto/create-url.dto';
+import { CreateUrlDto, FindAllUrlDto } from './dto';
 import { Url } from './entities/url.entity';
 
 @Injectable()
@@ -33,12 +34,38 @@ export class UrlService {
   }
 
   /**
-   * Encontrar todas las Url
+   * Encontrar todas las Url mediante busqueda
+   * @param findAllUrl Queries para la busqueda
    * @returns Arreglo de Url
    */
-  async findAll(): Promise<Url[]> {
+  async findAll( findAllUrl: FindAllUrlDto ): Promise<Url[]> {
+
+    const { limit = 10, offset = 0, search = '' } = findAllUrl;
+
     try {
-      const res = await this.urlRepository.find();
+      let res: Url[];
+
+      if ( isUUID( search ) ) {
+        res = await this.urlRepository.find({
+          where: { id: search },
+        })
+
+      } else if ( search ) {
+        res = await this.urlRepository.find({
+          where: { label: Like(`%${ search }%`) },
+          skip: offset,
+          take: limit,
+          order: { created: 'DESC' }
+        })
+
+      } else {
+        res = await this.urlRepository.find({
+          skip: offset,
+          take: limit,
+          order: { created: 'DESC' }
+        })
+      }
+
       return res;
 
     } catch ( error ) {
@@ -72,6 +99,22 @@ export class UrlService {
     try {
       await this.findOne( id );
       await this.urlRepository.delete( id );
+
+    } catch ( error ) {
+      this.catchErrors( error );
+    }
+  }
+
+  /**
+   * Eliminacion de todos los registros en la tabla Url
+   */
+  async deleteAllUrl(): Promise<void> {
+    try {
+      const queryBuilder = this.urlRepository.createQueryBuilder();
+      await queryBuilder
+        .delete()
+        .where({})
+        .execute();
 
     } catch ( error ) {
       this.catchErrors( error );

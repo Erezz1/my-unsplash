@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
-import { ApiResponse, ApiTags, ApiCreatedResponse, ApiBadRequestResponse, ApiBody } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Delete, ParseUUIDPipe, Query } from '@nestjs/common';
+import { ApiResponse, ApiTags, ApiCreatedResponse, ApiBadRequestResponse, ApiBody, ApiQuery } from '@nestjs/swagger';
 
 import { UrlService } from './url.service';
-import { CreateUrlDto } from './dto/create-url.dto';
+import { CreateUrlDto, FindAllUrlDto } from './dto';
 import { Url } from './entities/url.entity';
 
 @ApiTags('Url')
@@ -24,8 +24,9 @@ export class UrlController {
   @Get()
   @ApiResponse({ status: 200, description: 'Urls encontradas', type: [Url] })
   @ApiResponse({ status: 500, description: 'Ocurrio un problema con el servidor' })
-  findAllUrl() {
-    return this.urlService.findAll();
+  @ApiQuery({ description: 'Queries validos', type: FindAllUrlDto })
+  findAllUrl( @Query() query: FindAllUrlDto ) {
+    return this.urlService.findAll( query );
   }
 
   @Get(':id')

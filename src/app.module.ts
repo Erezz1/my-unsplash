@@ -6,6 +6,7 @@ import { join } from 'path';
 
 import { JoiValidationSchema } from './config';
 import { UrlModule } from './url/url.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { UrlModule } from './url/url.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UrlModule
+    UrlModule,
+    SeedModule
   ],
 })
 export class AppModule {}
