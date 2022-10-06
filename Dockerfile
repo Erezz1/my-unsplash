@@ -11,10 +11,10 @@ COPY . .
 RUN yarn build
 
 FROM node:18-alpine3.15 as runner
-WORKDIR /app
+WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY ./public /app/public
+COPY ./public ./public
 
 CMD ["node","dist/main"]
