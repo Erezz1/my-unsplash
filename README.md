@@ -2,8 +2,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-# DB connection #
-DB connection server
+# My Unsplash #
+My Unsplash server
 
 __NOTA:__ Correr la aplicacion con las siguientes dependencias ya instaladas de forma global
 * [Git](https://git-scm.com/)
@@ -32,18 +32,12 @@ Seguir la siguiente lista de pasos:
 4. Configurar variables de entorno __.env__ en base al molde __.example.env__ 
 > __Nota:__ Esta configuracion es para contar con una base de datos PostreSQL, si deseas utilizar otra base de datos SQL o una NoSQL, deberas modificar el archivo _docker-compose.yaml_ y _docker-compose.prod.yaml_, ademas de tambien modificar los archivos de configuracion _.env_, _./src/config/joi.validation.d.ts_ y _./src/config/joi.validation.ts_.
 
-5. Correr base de datos con docker-compose
-> __Nota:__ Si decidiste no utilizar una base de datos, no sigas este paso y salta al paso 6.
-```
-  $ docker-compose up -d
-```
-
-6. Correr la aplicacion en modo desarrollo
+5. Correr la aplicacion en modo desarrollo
 ```
   $ yarn start:dev
 ```
 
-7. Accede a los siguientes links
+6. Accede a los siguientes links
 * Documentacion: [http://localhost:3000/docs/](#)
 * Api: [http://localhost:3000/api/](#)
 * Home: [http://localhost:3000/](#)
@@ -53,5 +47,5 @@ Seguir la siguiente lista de pasos:
 1. Realizar los pasos del 1 al 4 de la seccion __Iniciar desarrollo__
 2. Correr la aplicacion completa mediante un contenedor de Docker
 ```
-  $ docker-compose -f docker-compose.prod.yaml up -d 
+  $ docker-compose up -d
 ```
