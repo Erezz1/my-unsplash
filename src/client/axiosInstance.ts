@@ -1,5 +1,5 @@
 
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import Swal from 'sweetalert2';
 
 const toast = Swal.mixin({

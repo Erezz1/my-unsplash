@@ -7,6 +7,11 @@ import { startLoading, endLoading } from '@/redux/ui';
 import { removeImage } from '@/redux/url';
 import { Image as IImage } from '@/interfaces';
 
+/**
+ * Custom hook para eliminar una imagen del layout
+ * @param image Imagen a eliminar
+ * @returns propiedades para el manejo del hook
+ */
 export const useRemoveImage = ( image: IImage ) => {
 
     const dispatch = useDispatch();

@@ -11,6 +11,11 @@ interface INewImage {
     label: string;
     url: string;
 }
+/**
+ * Custom hook para poder agregar una imagen nueva al layout
+ * @param newImage Imagen que se agregara
+ * @returns Estado de la carga y funcion para agregar la imagen
+ */
 export const useAddImage = ( newImage: INewImage ) => {
 
     const dispatch = useDispatch();

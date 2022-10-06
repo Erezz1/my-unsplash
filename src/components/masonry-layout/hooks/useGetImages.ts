@@ -12,6 +12,10 @@ import { startLoading, endLoading } from '@/redux/ui';
 
 const controller = new AbortController();
 
+/**
+ * Custom hook para la obtencion de imagenes
+ * @returns Propiedades necesarias para el manejo del hook
+ */
 export const useGetImages = () => {
 
     const [ page, setPage ] = useState<number>(0);
